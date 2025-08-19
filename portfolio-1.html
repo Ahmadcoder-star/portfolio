@@ -1,0 +1,804 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Your Name — Professional Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <meta name="description"
+    content="Portfolio of Your Name — professional frontend developer. Projects, case studies, services, blog and contact." />
+  <style>
+    :root {
+      --bg: #071226;
+      --card: rgba(255, 255, 255, 0.03);
+      --muted: #94a3b8;
+      --accent: #06b6d4;
+      --accent-2: #7c3aed;
+      --glass: rgba(255, 255, 255, 0.03);
+      --radius: 14px;
+      --max-w: 1200px;
+      --gap: clamp(12px, 2.2vw, 24px);
+      --smooth: 250ms cubic-bezier(.2, .8, .2, 1);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0
+    }
+
+    html,
+    body {
+      height: 100%
+    }
+
+    body {
+      font-family: 'Urbanist', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      background: linear-gradient(180deg, #071226, #051423);
+      color: #eaf2ff;
+      padding: 24px;
+      display: flex;
+      justify-content: center;
+      line-height: 1.5;
+    }
+
+    .container {
+      width: 100%;
+      max-width: var(--max-w);
+      display: grid;
+      gap: var(--gap)
+    }
+
+    /* Header */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px;
+      border-radius: var(--radius);
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), transparent);
+      backdrop-filter: blur(8px);
+      position: sticky;
+      top: 18px;
+      z-index: 40
+    }
+
+    .brand {
+      display: flex;
+      gap: 12px;
+      align-items: center
+    }
+
+    .logo {
+      width: 56px;
+      height: 56px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      display: grid;
+      place-items: center;
+      font-weight: 800;
+      color: #021426
+    }
+
+    nav {
+      display: flex;
+      gap: 10px;
+      align-items: center
+    }
+
+    nav a {
+      color: var(--muted);
+      text-decoration: none;
+      padding: 8px 12px;
+      border-radius: 10px;
+      font-weight: 700
+    }
+
+    nav a:hover {
+      color: var(--accent)
+    }
+
+    .cta-small {
+      padding: 8px 12px;
+      border-radius: 10px;
+      background: transparent;
+      border: 1px solid rgba(255, 255, 255, 0.04);
+      font-weight: 700;
+      color: var(--muted)
+    }
+
+    /* Hero */
+    .hero {
+      display: grid;
+      grid-template-columns: 1fr min(420px, 42%);
+      gap: 20px;
+      padding: 28px;
+      border-radius: var(--radius);
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), transparent)
+    }
+
+    .intro h1 {
+      font-size: clamp(1.6rem, 3.4vw, 2.8rem);
+      line-height: 1.05
+    }
+
+    .intro p {
+      color: var(--muted);
+      margin-top: 10px
+    }
+
+    .hero-cta {
+      display: flex;
+      gap: 12px;
+      margin-top: 18px
+    }
+
+    .btn {
+      padding: 12px 16px;
+      border-radius: 10px;
+      border: 0;
+      cursor: pointer;
+      font-weight: 800
+    }
+
+    .btn-primary {
+      background: linear-gradient(90deg, var(--accent), var(--accent-2));
+      color: #021426
+    }
+
+    .btn-outline {
+      background: transparent;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      color: var(--muted)
+    }
+
+    .hero-card {
+      background: rgba(255, 255, 255, 0.02);
+      padding: 18px;
+      border-radius: 12px;
+      display: grid;
+      gap: 12px
+    }
+
+    .avatar {
+      width: 84px;
+      height: 84px;
+      border-radius: 14px;
+      background: linear-gradient(180deg, #0e2840, #072133);
+      display: grid;
+      place-items: center;
+      font-weight: 800
+    }
+
+    .skills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px
+    }
+
+    .skill-pill {
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.03);
+      font-weight: 700
+    }
+
+    /* Sections stack */
+    section {
+      padding: 20px;
+      border-radius: 12px;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.01), transparent)
+    }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 18px
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 16px
+    }
+
+    /* Services */
+    .services {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px
+    }
+
+    .service {
+      padding: 16px;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.02);
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.35);
+      transition: transform var(--smooth)
+    }
+
+    .service:hover {
+      transform: translateY(-6px)
+    }
+
+    /* Stats */
+    .stats {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap
+    }
+
+    .stat {
+      flex: 1;
+      min-width: 160px;
+      padding: 12px;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.02);
+      text-align: center
+    }
+
+    .stat strong {
+      display: block;
+      font-size: 1.6rem
+    }
+
+    /* Case studies */
+    .case {
+      display: grid;
+      grid-template-columns: 1fr 320px;
+      gap: 18px;
+      padding: 14px;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.02)
+    }
+
+    .case .meta {
+      color: var(--muted);
+      font-size: 0.95rem
+    }
+
+    .metrics {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 12px
+    }
+
+    .metric {
+      padding: 8px 12px;
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.02);
+      min-width: 120px
+    }
+
+    /* Skills matrix */
+    .skills-matrix {
+      display: grid;
+      gap: 8px
+    }
+
+    .skill-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      padding: 8px;
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.01)
+    }
+
+    .skill-level {
+      height: 10px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.04);
+      flex: 1;
+      overflow: hidden
+    }
+
+    .skill-level>i {
+      display: block;
+      height: 100%;
+      background: linear-gradient(90deg, var(--accent), var(--accent-2));
+    }
+
+    /* Timeline */
+    .timeline {
+      display: grid;
+      gap: 12px
+    }
+
+    .timeline-item {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start
+    }
+
+    .timeline-item time {
+      color: var(--muted);
+      width: 110px;
+      font-weight: 700
+    }
+
+    /* Testimonials */
+    .testimonials {
+      display: grid;
+      grid-auto-flow: column;
+      grid-auto-columns: minmax(260px, 1fr);
+      gap: 12px;
+      overflow: auto;
+      padding-bottom: 6px
+    }
+
+    .testimonial {
+      min-width: 260px;
+      padding: 14px;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.02)
+    }
+
+    .testimonial .who {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      margin-bottom: 8px
+    }
+
+    .who .photo {
+      width: 44px;
+      height: 44px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      display: grid;
+      place-items: center
+    }
+
+    /* Blog */
+    .posts {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 12px
+    }
+
+    .post {
+      padding: 12px;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.02)
+    }
+
+    /* Contact */
+    form {
+      display: grid;
+      gap: 10px
+    }
+
+    input,
+    textarea,
+    select {
+      padding: 12px;
+      border-radius: 10px;
+      border: 1px solid rgba(255, 255, 255, 0.04);
+      background: transparent;
+      color: inherit
+    }
+
+    textarea {
+      min-height: 120px
+    }
+
+    /* CTA banner */
+    .cta-banner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      padding: 18px;
+      border-radius: 12px;
+      background: linear-gradient(90deg, var(--accent), var(--accent-2));
+      color: #021426
+    }
+
+    /* Footer */
+    footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px;
+      border-radius: 12px;
+      color: var(--muted)
+    }
+
+    /* Accessibility */
+    a:focus,
+    button:focus,
+    input:focus,
+    textarea:focus {
+      outline: 3px solid rgba(6, 182, 212, 0.12);
+      outline-offset: 3px
+    }
+
+    /* Responsive behaviour via grid's auto-fit and clamp — no media queries needed */
+  </style>
+</head>
+
+<body>
+  <div class="container" role="main">
+
+    <!-- Header -->
+    <header>
+      <div class="brand">
+        <div class="logo">YN</div>
+        <div>
+          <div style="font-weight:800">Your Name</div>
+          <div style="color:var(--muted);font-size:0.95rem">Senior Frontend Engineer & UI Specialist</div>
+        </div>
+      </div>
+      <nav aria-label="Main navigation">
+        <a href="#about">About</a>
+        <a href="#services">Services</a>
+        <a href="#case-studies">Case Studies</a>
+        <a href="#blog">Blog</a>
+        <a class="cta-small" href="#contact">Hire Me</a>
+      </nav>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero" aria-labelledby="intro">
+      <div class="intro">
+        <h1 id="intro">I build performant, accessible, and beautiful web experiences.</h1>
+        <p>Hi — I'm <strong>Your Name</strong>, a frontend engineer who helps companies ship polished user interfaces,
+          optimize conversion flows, and scale designs into robust code. I lead front-end architecture, mentor teams,
+          and deliver measurable product improvements.</p>
+        <div class="hero-cta">
+          <a class="btn btn-primary" href="#case-studies">See case studies</a>
+          <a class="btn btn-outline" href="#contact">Request proposal</a>
+        </div>
+
+        <div style="margin-top:18px;color:var(--muted);display:flex;gap:12px;flex-wrap:wrap">
+          <div style="display:flex;align-items:center;gap:8px"><strong>Available for</strong><span
+              class="skill-pill">Freelance</span><span class="skill-pill">Full-time</span></div>
+        </div>
+      </div>
+
+      <aside class="hero-card" aria-label="Profile summary">
+        <div style="display:flex;gap:12px;align-items:center">
+          <div class="avatar">YN</div>
+          <div>
+            <div style="font-weight:800">Your Name</div>
+            <div style="color:var(--muted);font-size:0.95rem">Frontend Engineer — React, Typescript, Accessibility</div>
+          </div>
+        </div>
+
+        <div>
+          <div style="font-weight:700;margin-bottom:8px">Core competencies</div>
+          <div class="skills">
+            <span class="skill-pill">UI Architecture</span>
+            <span class="skill-pill">Performance</span>
+            <span class="skill-pill">Accessibility</span>
+            <span class="skill-pill">Design Systems</span>
+            <span class="skill-pill">E2E Testing</span>
+          </div>
+        </div>
+
+        <div style="display:flex;gap:8px;margin-top:8px">
+          <a class="skill-pill" href="#case-studies">View Case Studies</a>
+          <a class="skill-pill" href="#contact">Download Resume</a>
+        </div>
+      </aside>
+    </section>
+
+    <!-- Stats -->
+    <section aria-label="Key stats">
+      <div class="stats">
+        <div class="stat"><strong>120+</strong>
+          <div style="color:var(--muted)">Projects completed</div>
+        </div>
+        <div class="stat"><strong>8</strong>
+          <div style="color:var(--muted)">Years experience</div>
+        </div>
+        <div class="stat"><strong>40+</strong>
+          <div style="color:var(--muted)">Clients worldwide</div>
+        </div>
+        <div class="stat"><strong>4.9/5</strong>
+          <div style="color:var(--muted)">Average client rating</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Services -->
+    <section id="services">
+      <h2>Services</h2>
+      <div class="services">
+        <div class="service">
+          <h3>Frontend Development</h3>
+          <p class="meta" style="color:var(--muted)">Build high-performance React/Typescript apps with strong test
+            coverage and CI/CD.</p>
+        </div>
+        <div class="service">
+          <h3>Design Systems</h3>
+          <p class="meta" style="color:var(--muted)">Create reusable component libraries and documentation to scale
+            teams.</p>
+        </div>
+        <div class="service">
+          <h3>UX & Accessibility</h3>
+          <p class="meta" style="color:var(--muted)">Improve conversion and inclusivity through research-driven UI and
+            WCAG compliance.</p>
+        </div>
+        <div class="service">
+          <h3>Performance Audits</h3>
+          <p class="meta" style="color:var(--muted)">Lighthouse-led optimizations to reduce load time and improve Core
+            Web Vitals.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Case studies -->
+    <section id="case-studies">
+      <h2>Case Studies</h2>
+
+      <article class="case" aria-labelledby="case1">
+        <div>
+          <h3 id="case1">E-commerce Redesign — +28% Conversion</h3>
+          <div class="meta">Role: Lead Frontend — Timeline: 4 months — Team: 4 engineers</div>
+          <p style="margin-top:8px;color:var(--muted)">Led a redesign of a direct-to-consumer e-commerce store. Focused
+            on checkout flow, component performance, and mobile-first UX.</p>
+          <div class="metrics">
+            <div class="metric"><strong>+28%</strong>
+              <div style="color:var(--muted);font-size:0.9rem">Checkout conversion</div>
+            </div>
+            <div class="metric"><strong>-42%</strong>
+              <div style="color:var(--muted);font-size:0.9rem">Time-to-interactive</div>
+            </div>
+            <div class="metric"><strong>95</strong>
+              <div style="color:var(--muted);font-size:0.9rem">Lighthouse performance</div>
+            </div>
+          </div>
+          <p style="margin-top:12px;color:var(--muted)">My contributions included building an accessible component
+            library, implementing server-side rendering for product pages, and optimizing images and critical CSS.</p>
+        </div>
+        <div style="display:grid;gap:12px">
+          <img src="https://via.placeholder.com/320x200" alt="case study screenshot"
+            style="width:100%;border-radius:10px;display:block">
+          <a class="cta-small" href="#">Read full case study</a>
+        </div>
+      </article>
+
+      <article class="case" aria-labelledby="case2" style="margin-top:12px">
+        <div>
+          <h3 id="case2">Analytics Dashboard — Real-time Insights</h3>
+          <div class="meta">Role: Frontend Architect — Timeline: 6 months — Team: 5 engineers</div>
+          <p style="margin-top:8px;color:var(--muted)">Built a performant SPA with real-time charts and streamlined data
+            flows. Implemented virtualization and code-splitting to handle large datasets.</p>
+          <div class="metrics">
+            <div class="metric"><strong>+63%</strong>
+              <div style="color:var(--muted);font-size:0.9rem">Query throughput</div>
+            </div>
+            <div class="metric"><strong>99.9%</strong>
+              <div style="color:var(--muted);font-size:0.9rem">Uptime</div>
+            </div>
+            <div class="metric"><strong>3x</strong>
+              <div style="color:var(--muted);font-size:0.9rem">Faster render</div>
+            </div>
+          </div>
+        </div>
+        <div style="display:grid;gap:12px">
+          <img src="https://via.placeholder.com/320x200" alt="dashboard screenshot"
+            style="width:100%;border-radius:10px;display:block">
+          <a class="cta-small" href="#">Read full case study</a>
+        </div>
+      </article>
+
+    </section>
+
+    <!-- Skills matrix & Experience -->
+    <section class="two-col">
+      <div>
+        <h2>Skills</h2>
+        <div class="skills-matrix" aria-hidden>
+          <div class="skill-row">
+            <div style="font-weight:700">HTML & Semantic Markup</div>
+            <div class="skill-level" style="width:40%"><i style="width:95%"></i></div>
+          </div>
+          <div class="skill-row">
+            <div style="font-weight:700">CSS (Grid, Flexbox)</div>
+            <div class="skill-level" style="width:40%"><i style="width:92%"></i></div>
+          </div>
+          <div class="skill-row">
+            <div style="font-weight:700">JavaScript / Typescript</div>
+            <div class="skill-level" style="width:40%"><i style="width:88%"></i></div>
+          </div>
+          <div class="skill-row">
+            <div style="font-weight:700">React & State Management</div>
+            <div class="skill-level" style="width:40%"><i style="width:90%"></i></div>
+          </div>
+          <div class="skill-row">
+            <div style="font-weight:700">Accessibility (WCAG)</div>
+            <div class="skill-level" style="width:40%"><i style="width:85%"></i></div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <h2>Experience</h2>
+        <div class="timeline">
+          <div class="timeline-item">
+            <time>2022 — Present</time>
+            <div>
+              <div style="font-weight:800">Senior Frontend Engineer — Acme Corp</div>
+              <div style="color:var(--muted);margin-top:6px">Led frontend team, built design system, improved page
+                performance and developer DX.</div>
+            </div>
+          </div>
+
+          <div class="timeline-item">
+            <time>2019 — 2022</time>
+            <div>
+              <div style="font-weight:800">Frontend Engineer — PixelWorks</div>
+              <div style="color:var(--muted);margin-top:6px">Built marketing sites and internal dashboards; collaborated
+                cross-functionally with designers.</div>
+            </div>
+          </div>
+
+          <div class="timeline-item">
+            <time>2016 — 2019</time>
+            <div>
+              <div style="font-weight:800">Web Developer — Freelance</div>
+              <div style="color:var(--muted);margin-top:6px">Delivered product websites and small web apps for startups
+                and agencies.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Testimonials & Awards -->
+    <section>
+      <h2>Testimonials</h2>
+      <div class="testimonials" role="list">
+        <div class="testimonial" role="listitem">
+          <div class="who">
+            <div class="photo">AR</div>
+            <div><strong>Aria Roberts</strong>
+              <div style="color:var(--muted);font-size:0.9rem">Head of Product, Shoply</div>
+            </div>
+          </div>
+          <div style="color:var(--muted)">"Your Name transformed our checkout flow — conversion went up and the new UI
+            is a joy to use. Highly recommend!"</div>
+        </div>
+
+        <div class="testimonial" role="listitem">
+          <div class="who">
+            <div class="photo">MK</div>
+            <div><strong>Marc Keane</strong>
+              <div style="color:var(--muted);font-size:0.9rem">CTO, DataViz</div>
+            </div>
+          </div>
+          <div style="color:var(--muted)">"Expert in scalable frontend architecture. Delivered a best-in-class dashboard
+            with excellent performance."</div>
+        </div>
+
+        <div class="testimonial" role="listitem">
+          <div class="who">
+            <div class="photo">LS</div>
+            <div><strong>Lea Sun</strong>
+              <div style="color:var(--muted);font-size:0.9rem">Founder, Luma</div>
+            </div>
+          </div>
+          <div style="color:var(--muted)">"Practical, design-aware, and always shipping solid code. A pleasure to work
+            with."</div>
+        </div>
+      </div>
+
+      <div style="margin-top:14px;display:flex;gap:12px;flex-wrap:wrap;align-items:center">
+        <div style="font-weight:800">Awards & Certifications</div>
+        <div style="color:var(--muted)">Certified Accessibility Specialist (W3C) • Lighthouse Auditor • UX Design
+          Certificate</div>
+      </div>
+    </section>
+
+    <!-- Blog / Insights -->
+    <section id="blog">
+      <h2>Insights</h2>
+      <div class="posts">
+        <article class="post">
+          <h3>Design tokens vs CSS variables — when to use which</h3>
+          <div style="color:var(--muted);font-size:0.9rem;margin-top:6px">A short guide on building scalable design
+            systems.</div>
+        </article>
+        <article class="post">
+          <h3>Improving Core Web Vitals quickly</h3>
+          <div style="color:var(--muted);font-size:0.9rem;margin-top:6px">Tactical steps to reduce LCP and TTI on large
+            sites.</div>
+        </article>
+        <article class="post">
+          <h3>Accessible forms: patterns that work</h3>
+          <div style="color:var(--muted);font-size:0.9rem;margin-top:6px">Practical examples and ARIA patterns for
+            complex forms.</div>
+        </article>
+      </div>
+    </section>
+
+    <!-- CTA banner -->
+    <section class="cta-banner" aria-label="Hire CTA">
+      <div>
+        <div style="font-weight:800;font-size:1.1rem">Ready to launch your next product?</div>
+        <div style="color:#04243a">I help companies design and build delightful web experiences that convert. Let's
+          talk.</div>
+      </div>
+      <div style="display:flex;gap:8px">
+        <a class="btn btn-primary" href="#contact">Request proposal</a>
+        <a class="btn btn-outline" href="#contact">Schedule call</a>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact">
+      <h2>Contact</h2>
+      <p style="color:var(--muted)">Prefer email? <strong>you@example.com</strong> — Or send a message below and I'll
+        reply within 48 hours.</p>
+      <form onsubmit="handleContact(event)">
+        <input name="name" type="text" placeholder="Your name" required />
+        <input name="email" type="email" placeholder="Email" required />
+        <select name="budget" aria-label="project budget">
+          <option value="">Project budget (optional)</option>
+          <option value="small">$2k — $10k</option>
+          <option value="medium">$10k — $50k</option>
+          <option value="large">$50k+</option>
+        </select>
+        <textarea name="message" placeholder="Tell me about your project" required></textarea>
+        <div style="display:flex;gap:12px;align-items:center">
+          <button class="btn btn-primary" type="submit">Send message</button>
+          <div style="color:var(--muted);font-size:0.9rem">Or email me at <strong>you@example.com</strong></div>
+        </div>
+      </form>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <div style="font-size:0.95rem">© <span id="year"></span> Your Name — Built with care</div>
+      <div style="display:flex;gap:12px;color:var(--muted)">
+        <a href="#">Privacy</a>
+        <a href="#">Resume</a>
+        <a href="#">GitHub</a>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    // fill year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // demo contact handler
+    function handleContact(e) {
+      e.preventDefault();
+      const fd = new FormData(e.target);
+      const data = Object.fromEntries(fd.entries());
+      alert('Thanks ' + (data.name || 'there') + " — I'll review your message and reply soon. (This is a demo.)");
+      e.target.reset();
+    }
+
+    // smooth scroll for internal links
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', e => {
+        const href = a.getAttribute('href');
+        if (href.length > 1) {
+          e.preventDefault();
+          const el = document.querySelector(href);
+          if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      })
+    })
+
+    // small accessibility: allow keyboard scrolling for testimonials container
+    const t = document.querySelector('.testimonials');
+    if (t) {
+      t.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowRight') t.scrollBy({ left: 260, behavior: 'smooth' });
+        if (e.key === 'ArrowLeft') t.scrollBy({ left: -260, behavior: 'smooth' });
+      });
+    }
+  </script>
+</body>
+
+</html>
